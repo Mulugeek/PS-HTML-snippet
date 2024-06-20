@@ -12,3 +12,17 @@ WEB_ROOT/admin/students/more2.accommodations.leftnav.footer.txt
 </script>
 
 [/if]
+
+
+
+<ul class="tabs">
+    <li id="senneeds" class="selected">
+        <a href="/admin/students/mtss/mtss_reading.html?frn=~(studentfrn)">Literacy</a>
+    </li>
+    <li id="mathtab">
+       <a href="/admin/students/mtss/mtss_math.html?frn=~(studentfrn)">Math</a>
+    </li>
+    <li id="behaviortab">
+       <a href="/admin/students/mtss/mtss_behavior.html?frn=~(studentfrn)">SEL</a>
+    </li>
+</ul>
