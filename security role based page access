@@ -26,3 +26,8 @@ WEB_ROOT/admin/students/more2.accommodations.leftnav.footer.txt
        <a href="/admin/students/mtss/mtss_behavior.html?frn=~(studentfrn)">SEL</a>
     </li>
 </ul>
+
+
+<div align="center" style="margin-bottom:10px">
+<a class="dialog dockedDialog button" href="addmtss_read.html?frn=001~(rn)&authId=-1&subject=Reading">New Intervention Record</a>
+</div>
