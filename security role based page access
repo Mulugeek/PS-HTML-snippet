@@ -31,3 +31,1007 @@ WEB_ROOT/admin/students/more2.accommodations.leftnav.footer.txt
 <div align="center" style="margin-bottom:10px">
 <a class="dialog dockedDialog button" href="addmtss_read.html?frn=001~(rn)&authId=-1&subject=Reading">New Intervention Record</a>
 </div>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RTI/MTSS - Literacy</title>
+<!-- required scripts -->
+	~[wc:commonscripts] 
+<!-- Required style sheets: screen.css, and print.css -->
+	<link href="/images/css/screen.css" rel="stylesheet" media="screen">
+	<link href="/images/css/print.css" rel="stylesheet" media="print">
+
+<style>
+    .AllAssess,.eldetailtable,.hidden {
+        display: none;
+    }
+    .emailTeachersDiv {
+        display: none;
+        text-align: center;
+    }
+    .moreassess,.eldetaillink,.miscFunctions  {
+        color: #195f7d;
+        cursor: pointer;
+        text-align: center;
+    }
+    .leftcolumn {
+        width: 45%;
+        float: left;
+    }        
+    .rightcolumn {
+        width: 50%;
+        float: left;
+    }
+    .rightcolumn h2 {
+        margin: 0 20px 10px;
+        padding-bottom: 0;
+    }
+    .rightcolumn h3 .button {
+	   font-size: 87%;
+        font-weight: normal;
+    }
+    .leftcolumn table,.rightcolumn table {
+        margin: 0 !important;
+        width: 100% !important;
+        border: medium none !important;
+    }
+    .reviewTable {padding: 0 !important;}
+    .green {
+        background-color: #CCFF99 !important;
+    }
+    ul.aimsscores {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+        margin: 0;
+    }
+    ul.aimsscores li {
+        list-style-type: none;
+        font-size: 11px;
+    }        
+    .aimswebplus th {
+        font-size: 12px;
+    }
+    td.vcenter {
+        vertical-align: middle;
+        text-align: center;
+        width: 60px;
+    }
+    .statusHIGH {
+        background-color: #EDA744;
+        padding: 2px;
+    }    
+    .statusMODERATE {
+        background-color: #F0CE4D;
+        padding: 2px;
+    }    
+    .statusNONE {
+        padding: 2px;
+    }
+    .reviewEditButton {padding-top: 5px;}
+    .wd10 {width: 10%;}
+    .wd15 {width: 15%;}
+    .wd20 {width: 20%;}
+    .wd25 {width: 25%;}
+    .wd35 {width: 35%;}
+    .wd40 {width: 40%;}
+    .wd45 {width: 45%;}
+    .leftcolumn .box-round h3 {
+        background-color: #e2e2e2;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        color: inherit;
+        font-weight: bold;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0 !important;
+        padding-left: 11px;
+        padding-right: 5px;
+        padding-bottom: 3px !important;
+        padding-top: 3px !important;
+        position: relative;
+    }
+    .noMessage {
+        text-align: center;
+    }
+    #legend,#cust-content-footer {display: none;}
+    .assessDiv {
+        display: none;
+    }
+    tr[class^="secondary"] {
+        background-color: #eeeeee; display:none;
+        border-left: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
+    }    
+    tr.primary {
+        background-color: #fff; border-bottom: 1px dotted #cccccc;
+        border-left: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
+    }  
+    .history-label {
+	    border-bottom: 1px solid #ccc;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 0;
+        margin: 17px 0 15px 0;
+        text-align: center;
+    }
+    .history-label span {
+        background:#fff;
+        padding:0 10px;    
+    }
+    .current-wrapper {
+        background-color: #DFF0D8;
+        border-radius: 4px;
+        padding: 5px;
+        margin: 5px;
+    }
+    .current-wrapper .box-round {
+        margin: 10px;
+        background-color: #fff;
+    }
+    .secHidden {
+        display: none;
+    }
+    td.starcell {
+        vertical-align: middle;
+        text-align: center;
+    }
+    </style>
+</head> 
+<body> 
+	~[wc:admin_header_frame_css]
+	<!-- breadcrumb start -->
+		<a href="/admin/home.html" target="_top">Start Page</a> &gt; <a href="/admin/students/home.html?selectstudent=nosearch" target="_top">Student Selection</a> &gt; RTI/MTSS Reading
+	<!-- breadcrumb end -->
+~[wc:admin_navigation_frame_css]
+<!-- start of main menu and content -->
+~[wc:title_student_begin_css]RTI/MTSS Tracking - Reading~[wc:title_student_end_css]
+<!-- start of content area -->
+
+<ul class="tabs">
+    <li id="readingtab" class="selected">
+        <a href="/admin/students/mtss/mtss_reading.html?frn=~(studentfrn)">Literacy</a>
+    </li>
+    <li id="mathtab">
+       <a href="/admin/students/mtss/mtss_math.html?frn=~(studentfrn)">Math</a>
+    </li>
+    <li id="behaviortab">
+       <a href="/admin/students/mtss/mtss_behavior.html?frn=~(studentfrn)">SEL</a>
+    </li>
+</ul>
+    
+<div class="leftcolumn">
+
+<div class="box-round studentinfo">
+    <table class="linkDescList">
+        <tr><td colspan="3"><table class="insidetable"><tr><td class="bold wd25">District Entry:</td><td class="wd25">~(districtentrydate)</td><td class="bold wd25">School Entry:</td><td class="wd25">~(schoolentrydate)</td></tr></table></td></tr>
+        <!-- attendance -->
+        <tr>
+        ~[tlist_sql;
+        SELECT
+        sum(ada.membershipvalue)-sum(ada.attendancevalue) absences,             to_char(round(sum(ada.attendancevalue)/sum(ada.membershipvalue)*100,1)) || '%' ADA
+        FROM students s        
+        JOIN schools schl ON schl.school_number = s.schoolid        
+        JOIN ps_adaadm_defaults_all ada ON ada.studentid = s.id        
+        WHERE s.id=~(curstudid)                    
+        AND to_date(ada.calendardate)  > to_date('8/01/'||(~(curyearid)+1990), 'mm/dd/yyyy')            
+        AND (to_date(ada.calendardate) <= to_date(current_date) and to_date(ada.calendardate)  < to_date('06/30/'||(~(curyearid)+1991), 'mm/dd/yyyy') )            
+        AND ada.membershipvalue > 0        
+        GROUP BY  s.lastfirst]   
+            <td><strong>Days Absent:</strong> ~(absences)</td>
+            <td><strong>ADA%:</strong> ~(ADA)</td>
+        [/tlist_sql]
+        ~[tlist_sql;
+        select
+        count(*)
+        from
+        students
+        join attendance on students.id = attendance.studentid
+        join attendance_code on attendance.attendance_codeid = attendance_code.id
+        join terms on attendance.yearid = terms.yearid and attendance.schoolid = terms.schoolid and terms.isyearrec = 1
+        where
+        attendance.att_mode_code = 'ATT_ModeDaily'
+        and UPPER(attendance_code.att_code) LIKE 'T%'
+        and attendance.att_date between terms.firstday and terms.lastday
+        and terms.yearid = ~(curyearid)
+        and students.id = ~(curstudid);]
+            <td><strong>Tardies:</strong> ~(tardies)</td>
+        [/tlist_sql]
+            </tr>
+            
+                    <tr>
+            ~[tlist_sql;
+            SELECT Count(ID)
+            FROM PS.Log
+            WHERE logtypeid = '-100000'
+	            AND entry_date > to_date('8/01/'||(~(curyearid)+1990), 'mm/dd/yyyy')
+            	AND StudentID = ~(curstudid);]
+            <td><strong>Majors:</strong> ~(majors)</td>[/tlist_sql]
+            ~[tlist_sql;
+            SELECT Count(ID)
+            FROM PS.Log
+            WHERE logtypeid = '2880'
+	            AND entry_date > to_date('8/01/'||(~(curyearid)+1990), 'mm/dd/yyyy')
+            	AND StudentID = ~(curstudid);]
+            <td><strong>Minors:</strong> ~(minors)</td>[/tlist_sql]
+            	
+            	
+            	
+            ~[tlist_sql;
+            SELECT Count(hov.healthofficevisitid) AS healthcount
+            FROM HEALTHMAINSTUDREC rec
+	        INNER JOIN HEALTHOFFICEVISIT hov ON rec.HEALTHMAINSTUDRECID = hov.HEALTHMAINSTUDRECID 
+	        AND rec.HEALTHMAINSTUDRECID = hov.HEALTHMAINSTUDRECID
+            WHERE hov.visitdate > to_date('8/01/'||(~(curyearid)+1990), 'mm/dd/yyyy')
+            AND hov.visittypeluid NOT IN (10152,10157,10173)
+            AND rec.studentID = ~(curstudid);]
+            <td><strong>Nurse Visits:</strong> ~(visits)</td>[/tlist_sql]
+        </tr>
+            
+            
+        <tr><td><strong>IEP:</strong> ~(decode;~(il_iep);1;<span class="statusMODERATE">Yes</span>;No)</td>
+            <td><strong>LEP:</strong> ~(decode;~(il_lep);1;<span class="statusMODERATE">Yes</span>;No)</td>
+            <td><strong>504:</strong> ~(decode;~([Students.S_IL_STU_Plan504_X]Participant);1;<span class="statusMODERATE">Yes</span>;No)</td></tr>
+        <tr><td colspan="3"><strong>Primary Disability:</strong> ~(decode;~(IL_Disability);99;None;01;Cognitive Disability;02;Hearing Impairments;03;Speech or Language Impairments;04;Visual Impairments;05;Emotional Disability;06;Orthopedic Impairments;07;Other Health Impairments;08;Specific Learning Disabilities;09;Deaf-Blindness;10;Multiple Disabilities;11;Autism;12;Traumatic Brain Injury;13;Developmental Delay;14;Deafness; )</td></tr>
+        <tr><td colspan="3"><div class="eldetaillink">View EL Details</div> 
+            <table class="eldetailtable linkDescList">
+            <tr><td class="bold">EL Placement</td><td>~(decode;~(IL_ELL_Entry_Status);10;TBE Full Time;11;TBE Part Time;12;TPI;13;Other/ Alternative;14;Parents Refused; )</td></tr>
+            <tr><td class="bold">EL Enrolled/Re-enrolled</td><td>~(IL_Enrolled_Reenrolled_ELL_Date)</td>
+            <tr><td class="bold">EL Ended</td><td>~(IL_End_Date)</td></tr>
+            <tr><td class="bold">Class Periods Provided Per Week</td><td>~(decode;~([STUDENTS.S_IL_STU_ELL_X]Class_Period_Per_Week);01;Low;02;Moderate;03;High; )</td></tr>
+            <tr><td class="bold">EL Services Provided</td><td>~(decode;~([STUDENTS.S_IL_STU_ELL_X]EL_Services_Provided);00;none;01;Dual Language - Two Way;02;Dual Language - One Way;03;Transitional Bilingual Program - Self-Contained;04;Transitional Bilingual Program - Collaboration;05;Transitional Program in English - Self-Contained;06;Transitional Program in English - Collaboration; )</td></tr>
+            </table>
+        </td></tr>
+        <tr><td colspan="3"><div class="bold transTitle">Transfers Within District</div>
+            <table class="linkDescList">
+                ~[tlist_sql;
+                   SELECT to_char(entrydate,'MM/DD/YYYY'),
+                to_char(exitdate,'MM/DD/YYYY'),
+                CASE WHEN schoolid = '412' THEN 'Euclid'
+                    WHEN schoolid = '414' THEN 'Indian Grove'
+                    WHEN schoolid = '417' THEN 'River Trails Middle School'
+                    WHEN schoolid = '500' THEN 'Early Learning Center'
+                    WHEN schoolid = '750' THEN 'Out of District'
+                    ELSE 'Other' END schoolname,
+                CASE TO_CHAR(grade_level) WHEN '-2' THEN 'PK'
+                    WHEN '-1' THEN 'PK'
+                    WHEN '0' THEN 'KG'
+                    ELSE TO_CHAR(grade_level) END
+            FROM PS_ENROLLMENT_ALL
+            WHERE studentid = ~(curstudid)
+                AND entrycode IN ('04')
+                ORDER BY entrydate desc
+                ;alternatecolor;nonemessage=<div class="noMessageTrans">No in district transfer records</div>]
+                <tr>
+            <td>~(entrydate)</td><td>~(exitdate)</td>
+            <td>~(schoolname)</td><td>~(grade_level)</td>
+        </tr>
+[/tlist_sql]
+            </table></td></tr>
+                <tr><td colspan="3"><div class="bold transTitle">First Year (or Return) in District</div>
+            <table class="linkDescList">
+            ~[tlist_sql;
+                SELECT to_char(entrydate,'MM/DD/YYYY'),
+                to_char(exitdate,'MM/DD/YYYY'),
+                CASE WHEN schoolid = '412' THEN 'Euclid'
+                    WHEN schoolid = '414' THEN 'Indian Grove'
+                    WHEN schoolid = '417' THEN 'River Trails Middle School'
+                    WHEN schoolid = '500' THEN 'Early Learning Center'
+                    WHEN schoolid = '750' THEN 'Out of District'
+                    ELSE 'Other' END schoolname,
+                CASE TO_CHAR(grade_level) WHEN '-2' THEN 'PK'
+                    WHEN '-1' THEN 'PK'
+                    WHEN '0' THEN 'KG'
+                    ELSE TO_CHAR(grade_level) END
+            FROM PS_ENROLLMENT_ALL
+            WHERE studentid = ~(curstudid)
+            AND entrycode IN ('01','02')
+            ORDER BY entrydate desc
+;alternatecolor;nonemessage=<div class="noMessageTrans">No in district transfer records</div>]
+<tr>
+<td>~(entrydate)</td><td>~(exitdate)</td>
+<td>~(schoolname)</td><td>~(grade_level)</td>
+</tr>
+[/tlist_sql]
+            </table></td></tr>
+        
+<!-- Misc functions -->
+<tr><td colspan="3">
+<div class="miscFunctions"><span class="emailTeachersLink">Email all of ~(first_name)'s Teachers</span></div>
+<div class="emailTeachersDiv">Highlight --&gt; Copy --&gt; Paste into an email message.<br>
+<textarea cols="60" rows="4" name="allemail" id="allemail">~[tlist_sql;
+SELECT DISTINCT
+t.email_addr email
+FROM CC cc
+INNER JOIN teachers t ON cc.teacherid = t.ID
+WHERE
+cc.studentid = ~(curstudid)
+AND cc.termid >= ~(curyearid)00
+
+ORDER BY t.email_addr;]~(email;t),[/tlist_sql]</textarea>
+</div> <!-- end email teachers -->
+    </td></tr>    
+    </table>
+    
+</div><!-- end student info -->
+ 
+ <!--  Remove AIMSWEB         
+<div class="box-round aimswebplus">
+<h3>AIMSweb Plus Benchmarks</h3>
+<div class="SingleAssess">
+ <table class="assess linkDescList">
+<thead><th>Grade</th><th>Score / Percentile</th></thead>
+ ~[tlist_sql;
+SELECT * FROM 
+(SELECT
+CASE WHEN aims.studentgrade = 'K' THEN '0' ELSE aims.studentgrade END studentgrade,
+CASE WHEN UPPER(aims.studentgrade) = 'K' THEN 'Kindergarten'
+WHEN aims.studentgrade = '1' THEN '1st'
+WHEN aims.studentgrade = '2' THEN '2nd'
+WHEN aims.studentgrade = '3' THEN '3rd'
+ELSE aims.studentgrade || 'th'
+END prettygrade,
+aims.period,
+LISTAGG(
+chr(60) || 'li' || chr(62) || aims.MeasureName || chr(58) || ' ' || chr(60) || 'span class="bold status' || CASE WHEN aims.Natl < 11 THEN 'HIGH' WHEN aims.Natl < 26 THEN 'MODERATE' ELSE 'NONE' END || '"' || chr(62) || aims.score || ' (' || aims.Natl || '%)' || chr(60) || '/span' || chr(62) || chr(60) || '/li' || chr(62)
+) WITHIN GROUP (ORDER BY CASE WHEN aims.RelatedForm = 'READB' THEN '1' WHEN aims.RelatedForm = 'MATHB' THEN '2' ELSE '3' end) AS SCORES
+FROM U_tests_aimswebplus aims
+WHERE aims.studentsdcid = ~(rn)
+AND aims.type = 'BM'
+GROUP BY CASE WHEN aims.studentgrade = 'K' THEN '0' ELSE aims.studentgrade END,
+CASE WHEN UPPER(aims.studentgrade) = 'K' THEN 'Kindergarten'
+WHEN aims.studentgrade = '1' THEN '1st'
+WHEN aims.studentgrade = '2' THEN '2nd'
+WHEN aims.studentgrade = '3' THEN '3rd'
+ELSE aims.studentgrade || 'th'
+END, 
+aims.period
+ORDER BY CASE WHEN UPPER(aims.studentgrade) = 'K' THEN 'Kindergarten'
+WHEN aims.studentgrade = '1' THEN '1st'
+WHEN aims.studentgrade = '2' THEN '2nd'
+WHEN aims.studentgrade = '3' THEN '3rd'
+ELSE aims.studentgrade || 'th'
+END desc,
+CASE WHEN aims.period = 'Spring' THEN '1'
+WHEN aims.period = 'Winter' THEN '2'
+WHEN aims.period = 'Fall' THEN '3'
+END) am
+WHERE am.studentgrade = (SELECT MAX(CASE WHEN studentgrade = 'K' THEN '0' ELSE studentgrade END) FROM u_tests_aimswebplus WHERE studentsdcid = ~(rn))
+;alternatecolor;nonemessage=<div class="noMessage">No AIMSweb Plus Records</div>]
+<tr>
+<td class="vcenter bold grade~(studentgrade)">~(prettygrade)<br>~(period)</td>
+<td><ul class="aimsscores">~(scores)</ul></td>
+</tr>
+[/tlist_sql]
+</table>
+    </div><!-- end single assess -> 
+<div class="moreassess">View Previous Scores</div>
+    <div class="AllAssess">
+<table class="assess linkDescList">
+ ~[tlist_sql;
+SELECT * FROM 
+(SELECT
+CASE WHEN aims.studentgrade = 'K' THEN '0' ELSE aims.studentgrade END studentgrade,
+CASE WHEN UPPER(aims.studentgrade) = 'K' THEN 'Kindergarten'
+WHEN aims.studentgrade = '1' THEN '1st'
+WHEN aims.studentgrade = '2' THEN '2nd'
+WHEN aims.studentgrade = '3' THEN '3rd'
+ELSE aims.studentgrade || 'th'
+END prettygrade,
+aims.period,
+LISTAGG(
+chr(60) || 'li' || chr(62) || aims.MeasureName || chr(58) || ' ' || chr(60) || 'span class="bold status' || aims.RiskStatus_2 || '"' || chr(62) || aims.score || ' (' || aims.Natl || '%)' || chr(60) || '/span' || chr(62) || chr(60) || '/li' || chr(62)
+) WITHIN GROUP (ORDER BY CASE WHEN aims.RelatedForm = 'READB' THEN '1' WHEN aims.RelatedForm = 'MATHB' THEN '2' ELSE '3' end) AS SCORES
+FROM U_tests_aimswebplus aims
+WHERE aims.studentsdcid = ~(rn)
+AND aims.type = 'BM'
+GROUP BY CASE WHEN aims.studentgrade = 'K' THEN '0' ELSE aims.studentgrade END,
+CASE WHEN UPPER(aims.studentgrade) = 'K' THEN 'Kindergarten'
+WHEN aims.studentgrade = '1' THEN '1st'
+WHEN aims.studentgrade = '2' THEN '2nd'
+WHEN aims.studentgrade = '3' THEN '3rd'
+ELSE aims.studentgrade || 'th'
+END, 
+aims.period
+ORDER BY CASE WHEN UPPER(aims.studentgrade) = 'K' THEN 'Kindergarten'
+WHEN aims.studentgrade = '1' THEN '1st'
+WHEN aims.studentgrade = '2' THEN '2nd'
+WHEN aims.studentgrade = '3' THEN '3rd'
+ELSE aims.studentgrade || 'th'
+END desc,
+CASE WHEN aims.period = 'Spring' THEN '1'
+WHEN aims.period = 'Winter' THEN '2'
+WHEN aims.period = 'Fall' THEN '3'
+END) am
+WHERE am.studentgrade != (SELECT MAX(CASE WHEN studentgrade = 'K' THEN '0' ELSE studentgrade END) FROM u_tests_aimswebplus WHERE studentsdcid = ~(rn))
+    ;alternatecolor;nonemessage=<div class="noMessagePrev">No Previous AIMSweb Plus Records</div>]
+<tr>
+<td class="vcenter bold grade~(studentgrade)">~(prettygrade)<br>~(period)</td>
+<td><ul class="aimsscores">~(scores)</ul></td>
+</tr>
+[/tlist_sql]
+</table>
+    </div><!-- end all assess -> 
+     </div><!-- end aimsweb -->   
+
+~[if#gradenw.~(grade_level)>0]
+<div class="box-round nwea">
+<h3>NWEA - Reading&nbsp; <!-- <span class="subtitle">(<a class="dialogC" href="/admin/charts/nwea.html?frn=~(studentfrn)">Chart</a>) -->
+</h3>
+<div class="SingleAssess">
+ <table class="assess linkDescList">
+ <thead><th>Grade</th><th>Term</th><th>Reading RIT / Percentile</th></thead>
+ ~[tlist_sql;
+SELECT 
+    CASE WHEN st.grade_level = '1' THEN '1st'
+	WHEN st.grade_level = '2' THEN '2nd'
+	WHEN st.grade_level = '3' THEN '3rd'
+	ELSE st.grade_level || 'th'
+	END, 
+    CASE
+    WHEN TO_NUMBER(TO_CHAR(st.test_date, 'MM')) BETWEEN 8 AND 11 THEN 'Fall'
+    WHEN TO_NUMBER(TO_CHAR(st.test_date, 'MM')) in (12,1,2) THEN 'WINTER'
+	WHEN TO_NUMBER(TO_CHAR(st.test_date, 'MM')) BETWEEN 3 AND 8 THEN 'SPRING'
+	ELSE 'x' END
+	, chr(60) || 'span class="status' || CASE WHEN TO_CHAR(MAX(CASE WHEN ts.name ='RIT' THEN sts.percentscore ELSE null END)) <= 25 THEN 'HIGH' END || '"' || chr(62) 
+	|| TO_CHAR(MAX(CASE WHEN ts.name ='RIT' THEN sts.numscore ELSE null END)) 
+	|| ' (' || TO_CHAR(MAX(CASE WHEN ts.name ='RIT' THEN sts.percentscore ELSE null END)) || ' Percentile)'  || chr(60) || '/span' || chr(62) as RIT
+
+
+FROM studenttest st
+JOIN studenttestscore sts ON sts.studenttestid = st.id
+JOIN testscore ts ON ts.id = sts.testscoreid
+JOIN TEST t ON st.TESTID=t.ID
+
+WHERE st.studentid =  ~(curstudid)
+AND t.NAME LIKE 'MAP Reading%'
+
+GROUP BY t.NAME
+	, st.grade_level
+	, st.test_date
+	
+ORDER BY st.test_date desc
+     ;alternatecolor;nonemessage=<div class="noMessage">No NWEA Records</div>]
+<tr>
+<td class="bold wd15">~(prettygrade)</td>
+<td class="bold wd15">~(term)</td>
+<td class="wd35">~(Reading)</td>
+</tr>
+[/tlist_sql]
+</table>
+</div> <!-- end singleassess -->
+  
+<!-- Previous NWEA   
+<div class="moreassess">View Previous Scores</div>
+    <div class="AllAssess">
+ <table class="assess linkDescList">
+ ~[tlist_sql;
+SELECT * FROM 
+(SELECT * FROM
+(
+SELECT
+nwea.grade,
+CASE WHEN nwea.grade = '1' THEN '1st'
+WHEN nwea.grade = '2' THEN '2nd'
+WHEN nwea.grade = '3' THEN '3rd'
+ELSE nwea.grade || 'th'
+END prettygrade,
+nwea.term term,
+nwea.Discipline Discipline,
+CASE WHEN nwea.Discipline = 'Reading'
+THEN (chr(60) || 'span class="status' || CASE WHEN nwea.TESTPERCENT <= 25 THEN 'HIGH' END || '"' || chr(62) || nwea.TestRITScore || ' (' || nwea.TESTPERCENT || '%)' || chr(60) || '/span' || chr(62) || ' / ' || nwea.RITTOREADINGSCORE)
+ELSE (chr(60) || 'span class="status' || CASE WHEN nwea.TESTPERCENT <= 25 THEN 'HIGH' END || '"' || chr(62) || nwea.TestRITScore || ' (' || nwea.TESTPERCENT || '%)' || chr(60) || '/span' || chr(62))
+END AS TestRITScore
+FROM U_tests_nwea nwea
+WHERE nwea.studentsdcid = ~(rn)
+)
+PIVOT
+(
+MAX(TestRITScore)
+for Discipline in ('Reading','Language')
+)
+ORDER BY grade desc, 
+case 
+  when term = 'fall' then 3 
+  when term = 'winter' then 2
+  when term = 'spring' then 1
+else 4
+end) nw
+WHERE nw.grade != (SELECT MAX(grade) FROM u_tests_nwea WHERE studentsdcid = ~(rn))
+     ;alternatecolor;nonemessage=<div class="noMessagePrev">No Previous NWEA Records</div>]
+<tr>
+<td class="bold wd15 grade~(grade)">~(prettygrade)</td>
+<td class="bold wd15">~(term)</td>
+<td class="wd35">~(Reading)</td>
+<td class="wd35">~(Language)</td>
+</tr>
+[/tlist_sql]
+</table>
+</div> <!-- end allassess -->
+        </div> <!-- end nwea -->
+[/if#gradenw]
+    
+~[if#gradek.~(f.in;value=~(grade_level);in=0,1)=1]
+<!-- end star -->   
+[/if#gradek]
+
+<!-- REMOVE COGAT    
+~[if#grade2.~(grade_level)>1]
+<div class="box-round cogat">
+<h3>COGAT &nbsp;<span class="subtitle">(<a class="dialogC" href="/admin/charts/cogat.html?frn=~(studentfrn)">Chart</a>)</span></h3>
+<div class="SingleAssess">
+<table class="assess linkDescList">
+     <thead><th class="wd20">Grade</th><th class="wd20">Nonverbal</th><th class="wd20">Quantitative</th><th class="wd20">Verbal</th><th class="wd20">Composite</th></thead>
+ ~[tlist_sql;
+SELECT * FROM 
+(SELECT
+cogat.grade,
+cogat.NONVERBAL,
+cogat.QUANTITATIVE,
+cogat.VERBAL,
+cogat.COMPOSITE
+FROM U_tests_cogat cogat
+WHERE cogat.STUDENTSDCID = ~(rn)
+ORDER BY cogat.GRADE desc) co
+WHERE co.grade = (SELECT MAX(grade) FROM u_tests_cogat WHERE studentsdcid = ~(rn))
+    ;alternatecolor;nonemessage=<div class="noMessage">No COGAT Records</div>]
+<tr>
+<td class="wd20 bold">~(grade)</td>
+<td class="wd20">~(NONVERBAL)</td>
+<td class="wd20">~(QUANTITATIVE)</td>
+<td class="wd20">~(VERBAL)</td>
+<td class="wd20">~(COMPOSITE)</td>
+</tr>
+[/tlist_sql]
+</table>
+    </div><!-- end single assess -> 
+<div class="moreassess">View Previous Scores</div>
+    <div class="AllAssess">
+<table class="assess linkDescList">
+~[tlist_sql;
+SELECT * FROM 
+(SELECT
+cogat.grade,
+cogat.NONVERBAL,
+cogat.QUANTITATIVE,
+cogat.VERBAL,
+cogat.COMPOSITE
+FROM U_tests_cogat cogat
+WHERE cogat.STUDENTSDCID = ~(rn)
+ORDER BY cogat.GRADE desc) co
+WHERE co.grade != (SELECT MAX(grade) FROM u_tests_cogat WHERE studentsdcid = ~(rn))
+    ;alternatecolor;nonemessage=<div class="noMessagePrev">No Previous COGAT Records</div>]
+<tr>
+<td class="wd20 bold">~(grade)</td>
+<td class="wd20">~(NONVERBAL)</td>
+<td class="wd20">~(QUANTITATIVE)</td>
+<td class="wd20">~(VERBAL)</td>
+<td class="wd20">~(COMPOSITE)</td>
+</tr>
+[/tlist_sql]
+</table>
+    </div><!-- end all assess -> 
+     </div><!-- end cogat ->   
+ [/if#grade2]  
+ REMOVE COGAT  -->
+
+<div class="box-round access">
+<h3>ACCESS &nbsp; <table class="assess linkDescList">
+
+</table>
+
+	<!--<span class="subtitle">(<a class="dialogC" href="/admin/charts/access.html?frn=~(studentfrn)">Chart</a>)</span> --></h3>
+<div class="SingleAssess">
+<table class="assess linkDescList">
+     <thead><th>Grade</th><th>Tier</th><th>Composite<br>Comprehension</th><th>Listen<br>Literacy</th><th>Oral<br>Reading</th><th>Speaking<br>Writing</th></thead>
+ ~[tlist_sql;
+SELECT
+ 	 CASE WHEN st.grade_level = '0' THEN 'KG'
+ 	WHEN st.grade_level = '1' THEN '1st'
+	WHEN st.grade_level = '2' THEN '2nd'
+	WHEN st.grade_level = '3' THEN '3rd'
+	ELSE st.grade_level || 'th'
+	END prettygrade
+
+	, MAX(CASE WHEN ts.name ='Tier' THEN sts.alphascore ELSE null END) 
+	, MAX(CASE WHEN ts.name ='Composite' THEN sts.numscore ELSE null END)  || ' (' || MAX(CASE WHEN ts.name ='Composite' THEN sts.alphascore ELSE null END) || ') ' as COMPOSITESCORE
+	, MAX(CASE WHEN ts.name = 'Comprehension' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Comprehension' THEN sts.alphascore ELSE null END) || ') '  as COMPREHENSIONSCORE
+	, MAX(CASE WHEN ts.name = 'Listening' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Listening' THEN sts.alphascore ELSE null END) || ') '  as LISTENINGSCORE
+	, MAX(CASE WHEN ts.name = 'Literacy' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Literacy' THEN sts.alphascore ELSE null END) || ') '  as LITERACYSCORE
+	, MAX(CASE WHEN ts.name = 'Oral' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Oral' THEN sts.alphascore ELSE null END) || ') '  as ORALSCORE
+	, MAX(CASE WHEN ts.name = 'Reading' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Reading' THEN sts.alphascore ELSE null END) || ') '  as READINGSCORE
+	, MAX(CASE WHEN ts.name = 'Speaking' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Speaking' THEN sts.alphascore ELSE null END) || ') '  as SPEAKINGSCORE
+	, MAX(CASE WHEN ts.name = 'Writing' THEN sts.numscore ELSE null END) || ' (' || MAX(CASE WHEN ts.name ='Writing' THEN sts.alphascore ELSE null END) || ') '  as WRITINGSCORE
+
+FROM studenttest st
+	JOIN studenttestscore sts ON sts.studenttestid = st.id
+	JOIN testscore ts ON ts.id = sts.testscoreid
+	JOIN TEST t ON st.TESTID=t.ID
+
+WHERE st.studentid = ~(curstudid)
+AND t.NAME = 'ACCESS'
+
+GROUP BY t.NAME
+	, st.grade_level
+	, st.TermID
+	
+
+ORDER BY st.TermID desc
+    ;alternatecolor;nonemessage=<div class="noMessage">No ACCESS Records</div>]
+<tr>
+<td class="wd10 bold">~(prettygrade)</td>
+<td class="wd10">~(TIER)</td>
+<td class="wd20">~(COMPOSITESCORE)<br>~(COMPREHENSIONSCORE)</td>
+<td class="wd20">~(LISTENINGSCORE)<br>~(LITERACYSCORE)</td>
+<td class="wd20">~(ORALSCORE)<br>~(READINGSCORE)</td>
+<td class="wd20">~(SPEAKINGSCORE)<br>~(WRITINGSCORE)</td>
+</tr>
+[/tlist_sql]
+</table>
+    </div><!-- end single assess --> 
+<div class="moreassess">View Previous Scores</div>
+    <div class="AllAssess">
+<table class="assess linkDescList">
+  ~[tlist_sql;
+SELECT * FROM 
+(SELECT
+ac.grade,
+CASE 
+WHEN ac.grade = 16 THEN 'PK1'
+WHEN ac.grade = 15 THEN 'K'
+ELSE to_char(ac.grade)
+END AS prettygrade,
+ac.TIER,
+(ac.COMPOSITESCORE || ' (' || ac.COMPOSITELEVEL || ')') COMPOSITESCORE,
+(ac.COMPREHENSIONSCORE || ' (' || ac.COMPREHENSIONLEVEL || ')') COMPREHENSIONSCORE,
+(ac.LISTENINGSCORE || ' (' || ac.LISTENINGLEVEL || ')') LISTENINGSCORE,
+(ac.LITERACYSCORE || ' (' || ac.LITERACYLEVEL || ')') LITERACYSCORE,
+(ac.ORALSCORE || ' (' || ac.ORALLEVEL || ')') ORALSCORE,
+(ac.READINGSCORE || ' (' || ac.READINGLEVEL || ')') READINGSCORE,
+(ac.SPEAKINGSCORE || ' (' || ac.SPEAKINGLEVEL || ')') SPEAKINGSCORE,
+(ac.WRITINGSCORE || ' (' || ac.WRITINGLEVEL || ')') WRITINGSCORE
+FROM U_tests_access ac
+WHERE ac.studentsdcid = ~(rn)
+ORDER BY case 
+  when ac.GRADE = 16 then -1 
+  when ac.GRADE = 15 then 0
+else ac.GRADE
+end desc) ac
+WHERE case 
+  when ac.GRADE = 16 then -1 
+  when ac.GRADE = 15 then 0
+else ac.GRADE end != (SELECT MAX(CASE WHEN grade = 16 THEN -1 WHEN grade = 15 THEN 0 ELSE grade END) FROM u_tests_access WHERE studentsdcid = ~(rn))
+    ;alternatecolor;nonemessage=<div class="noMessagePrev">No Previous ACCESS Records</div>]
+<tr>
+<td class="wd10 bold grade~(grade)">~(prettygrade)</td>
+<td class="wd10">~(TIER)</td>
+<td class="wd20">~(COMPOSITESCORE)<br>~(COMPREHENSIONSCORE)</td>
+<td class="wd20">~(LISTENINGSCORE)<br>~(LITERACYSCORE)</td>
+<td class="wd20">~(ORALSCORE)<br>~(READINGSCORE)</td>
+<td class="wd20">~(SPEAKINGSCORE)<br>~(WRITINGSCORE)</td>
+</tr>
+[/tlist_sql]
+</table>
+
+    </div><!-- end all assess --> 
+     </div><!-- end access --> 
+
+
+<!-- SUMMER SCHOOL 
+<div class="box-round summer">
+<h3>Summer School History</h3>
+<div class="SingleAssess">
+<table class="assess linkDescList">
+    <thead>
+        <tr><th>Year</th><th>AM Class</th><th>PM Class</th></tr>
+    </thead>
+    ~[tlist_sql;
+SELECT * FROM 
+(SELECT
+su.schoolyear,
+su.class1,
+su.class2
+FROM u_summer_history su
+WHERE su.studentsdcid = ~(rn)
+ORDER BY su.schoolyear desc) sc
+WHERE sc.schoolyear = (SELECT MAX(schoolyear) FROM u_summer_history WHERE studentsdcid = ~(rn))
+;alternatecolor;nonemessage=<div class="noMessage">No Summer School History Found</div>]
+<tr><td class="wd10">~(schoolyear)</td><td class="wd45">~(class1)</td><td class="wd45">~(class2)</td></tr>
+[/tlist_sql]
+    </table>
+    </div><!-- end single assess -> 
+<div class="moreassess">View Previous Summer School</div>
+    <div class="AllAssess">
+<table class="assess linkDescList">
+    ~[tlist_sql;
+SELECT * FROM 
+(SELECT
+su.schoolyear,
+su.class1,
+su.class2
+FROM u_summer_history su
+WHERE su.studentsdcid = ~(rn)
+ORDER BY su.schoolyear desc) sc
+WHERE sc.schoolyear != (SELECT MAX(schoolyear) FROM u_summer_history WHERE studentsdcid = ~(rn))
+;alternatecolor;nonemessage=<div class="noMessagePrev">No Summer School History Found</div>]
+<tr><td class="wd10">~(schoolyear)</td><td class="wd45">~(class1)</td><td class="wd45">~(class2)</td></tr>
+[/tlist_sql]
+    </table>
+    </div><!-- end all summer history -> 
+     </div><!-- end summer history -->   
+
+    </div> <!-- end left column -->
+    	
+    <div class="rightcolumn">
+~[tlist_sql;
+SELECT to_char(tentry, 'fmMM/DD/YYYY') FROM
+(SELECT count(*),MIN(tier_entry) tentry, studentsdcid, tier_exit
+FROM u_rti_tier
+GROUP BY studentsdcid,tier_exit
+HAVING count(*) > 1
+AND studentsdcid = ~(rn)
+AND tier_exit IS NULL
+AND tier_subject = 'reading')
+;]<div class="feedback-alert">Multiple current records. Set an exit/change date and type for the record starting on ~(tentry).</div>
+[/tlist_sql]
+
+<!-- current record -->
+<div align="center" style="margin-bottom:10px">
+<a class="dialog dockedDialog button" href="addmtss_read.html?frn=001~(rn)&authId=-1&subject=Reading">New Intervention Record</a>
+</div>
+<div class="current-wrapper">
+~[tlist_sql;
+SELECT
+t.tier_entry,
+to_char(t.tier_entry, 'fmMM/DD/YYYY'),
+CASE WHEN t.tier_exit is null THEN 'Current'
+ELSE to_char(t.tier_exit, 'fmMM/DD/YYYY') END,
+t.tier_level,
+t.studentsdcid,
+t.id,
+t.tier_age,
+CASE 
+    WHEN t.tier_area = 'Computation' THEN 'Computation'
+    WHEN t.tier_area = 'Concepts_Applications' THEN 'Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Comp_Concepts_Apps' THEN 'Computation ' || chr(43) || ' Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Early Numeracy' THEN 'Early Numeracy' ELSE t.tier_area END,
+t.tier_program,
+CASE WHEN t.tier_days = '1' THEN '1 Day' ELSE t.tier_days || ' Days' END,
+t.tier_min,
+t.tier_group_size,
+CASE WHEN t.tier_sec_program IS NULL THEN 'secHidden' ELSE 'secShow' END,
+t.tier_sec_program,
+CASE WHEN t.tier_sec_days = '1' THEN '1 Day' ELSE t.tier_sec_days || ' Days' END,
+t.tier_sec_min,
+t.tier_sec_group_size,
+CASE WHEN t.tier_attissue IS NULL THEN 'None' ELSE t.tier_attissue END,
+CASE WHEN t.tier_attissue IS NOT NULL THEN chr(60) || 'strong' || chr(62) || 'Att Details' || chr(58) || ' ' || chr(60) || '/strong' || chr(62) || t.tier_attnotes ELSE ' ' END,
+t.tier_interventionist,
+t.tier_interventionist_addr,
+t.tier_notes,
+LISTAGG(
+CASE WHEN r.review_date IS NOT NULL THEN chr(60) || 'tr' || chr(62) || 
+chr(60) || 'td align="center"' || chr(62) || to_char(r.review_date, 'MM/DD/YYYY') || chr(60) || 'div class="reviewEditButton"' || chr(62) || chr(60) || 'a href="editreview_reading.html?frn=001' || t.studentsdcid || chr(38) || 'tierid=' || t.id || chr(38) || 'editid=' || r.id || '" class="dialog dockedDialog button"' || chr(62) || 'Edit' || chr(60) || '/a' || chr(62) || chr(60) || '/div' || chr(62) || chr(60) || '/td' || chr(62) ||  
+chr(60) || 'td' || chr(62) || chr(60) || 'div class="fixBreaks"' || chr(62) || r.review_decisions || chr(60) || '/div' || chr(62) || chr(60) || '/td' || chr(62) || 
+chr(60) || 'td' || chr(62) || chr(60) || 'div class="fixBreaks"' || chr(62) || r.review_notes || chr(60) || '/div' || chr(62) || chr(60) || '/td' || chr(62) || 
+chr(60) || '/tr' || chr(62) END
+) WITHIN GROUP (ORDER BY r.review_date desc) AS reviews
+FROM u_rti_tier t
+LEFT OUTER JOIN u_rti_review r ON t.id = r.u_rti_tierid
+WHERE t.studentsdcid = ~(rn)
+AND UPPER(t.tier_subject) = 'READING'
+AND t.tier_exit is null
+GROUP BY 
+t.tier_entry,
+to_char(t.tier_entry, 'fmMM/DD/YYYY'),
+CASE WHEN t.tier_exit is null THEN 'Current'
+ELSE to_char(t.tier_exit, 'fmMM/DD/YYYY') END,
+t.tier_level,
+t.studentsdcid,
+t.id,
+t.tier_age,
+t.tier_grade,
+CASE 
+    WHEN t.tier_area = 'Computation' THEN 'Computation'
+    WHEN t.tier_area = 'Concepts_Applications' THEN 'Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Comp_Concepts_Apps' THEN  'Computation ' || chr(43) || ' Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Early Numeracy' THEN 'Early Numeracy'  ELSE t.tier_area END,
+t.tier_program,
+CASE WHEN t.tier_days = '1' THEN '1 Day' ELSE t.tier_days || ' Days' END,
+t.tier_min,
+t.tier_group_size,
+CASE WHEN t.tier_sec_program IS NULL THEN 'secHidden' ELSE 'secShow' END,
+t.tier_sec_program,
+CASE WHEN t.tier_sec_days = '1' THEN '1 Day' ELSE t.tier_sec_days || ' Days' END,
+t.tier_sec_min,
+t.tier_sec_group_size,
+CASE WHEN t.tier_attissue IS NULL THEN 'None' ELSE t.tier_attissue END,
+CASE WHEN t.tier_attissue IS NOT NULL THEN chr(60) || 'strong' || chr(62) || 'Att Details' || chr(58) || ' ' || chr(60) || '/strong' || chr(62) || t.tier_attnotes ELSE ' ' END,
+t.tier_interventionist,
+t.tier_interventionist_addr,
+t.tier_notes
+ORDER BY t.tier_entry desc
+;alternatecolor;nonemessage=<div class="noMessage">No Current Tier Record</div>]
+<div class="box-round current">
+<div class="hidden">~(tier_entry)</div>
+<h3>~(tier_entry_pretty) - ~(tier_exit) &nbsp;&nbsp;&nbsp;TIER: ~(tier_level) &nbsp;&nbsp;&nbsp;<a href="editmtss_read.html?frn=001~(studentsdcid)&studentsdcid=~(studentsdcid)&editid=~(id)" class="dialog dockedDialog button">Edit This Record</a></h3>
+    <table class="linkDescList">
+    <tr><td><strong>Entry Age:</strong> ~(tier_age)</td><td colspan="2"><strong>Area of Support:</strong> ~(tier_area)</td></tr>
+    <tr><td colspan="3">1. <strong>Materials / Program / Level:</strong> ~(tier_program)</td></tr>
+    <tr><td>1. <strong>Days:</strong> ~(tier_days)</td><td><strong>Minutes:</strong> ~(tier_min)</td><td><strong>Group Size:</strong> ~(tier_group_size)</td></tr>
+    <tr class="~(show_2nd)"><td colspan="3">2. <strong>Materials / Program / Level:</strong> ~(tier_sec_program)</td></tr>
+    <tr class="~(show_2nd)"><td>2. <strong>Days:</strong> ~(tier_sec_days)</td><td><strong>Minutes:</strong> ~(tier_sec_min)</td><td><strong>Group Size:</strong> ~(tier_sec_group_size)</td></tr>
+    <tr><td><strong>Att Issues:</strong> ~(tier_attcheck)</td><td colspan="2"><div class="attdetails">~(tier_attnotes)</div></td></tr>
+    <tr><td colspan="3"><strong>Interventionist:</strong> ~(tier_interventionist) &nbsp;&nbsp;&nbsp;<strong>Email:</strong> ~(tier_interventionist_addr)</td></tr>
+    <tr><td colspan="3"><strong>Notes:</strong><div class="fixBreaks">~(tier_notes)</div></td></tr>
+    <tr><td colspan="3"><a class="dialog dockedDialog button" href="addreview_reading.html?frn=001~(studentsdcid)&tierid=~(id)&authId=-1">Add Review</a></td></tr>
+    <tr><td colspan="3" class="reviewTable"><table><thead><tr><th>Review Date</th><th>Decisions</th><th>Notes</th></tr></thead>~(reviews)</table></td></tr>
+    </table>  
+    </div>
+[/tlist_sql]
+</div> <!-- end current-wrapper -->
+<div class="history-label"><span>HISTORY</span></div>
+<div class="history-wrapper">
+~[tlist_sql;
+SELECT
+ROWNUM,
+t.tier_entry,
+to_char(t.tier_entry, 'fmMM/DD/YYYY'),
+CASE WHEN t.tier_exit is null THEN 'Current'
+ELSE to_char(t.tier_exit, 'fmMM/DD/YYYY') END,
+t.tier_level,
+t.studentsdcid,
+t.id,
+t.tier_age,
+CASE 
+    WHEN t.tier_area = 'Computation' THEN 'Computation'
+    WHEN t.tier_area = 'Concepts_Applications' THEN 'Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Comp_Concepts_Apps' THEN  'Computation ' || chr(43) || ' Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Early Numeracy' THEN 'Early Numeracy'  ELSE t.tier_area END,
+t.tier_program,
+CASE WHEN t.tier_days = '1' THEN '1 Day' ELSE t.tier_days || ' Days' END,
+t.tier_min,
+t.tier_group_size,
+CASE WHEN t.tier_sec_program IS NULL THEN 'secHidden' ELSE 'secShow' END,
+t.tier_sec_program,
+CASE WHEN t.tier_sec_days = '1' THEN '1 Day' ELSE t.tier_sec_days || ' Days' END,
+t.tier_sec_min,
+t.tier_sec_group_size,
+CASE WHEN t.tier_attissue IS NULL THEN 'None' ELSE t.tier_attissue END,
+CASE WHEN t.tier_attissue IS NOT NULL THEN chr(60) || 'strong' || chr(62) || 'Att Details' || chr(58) || ' ' || chr(60) || '/strong' || chr(62) || t.tier_attnotes ELSE ' ' END,
+t.tier_interventionist,
+t.tier_interventionist_addr,
+t.tier_notes,
+LISTAGG(
+CASE WHEN r.review_date IS NOT NULL THEN chr(60) || 'tr' || chr(62) || 
+chr(60) || 'td align="center"' || chr(62) || to_char(r.review_date, 'MM/DD/YYYY') || chr(60) || 'div class="reviewEditButton"' || chr(62) || chr(60) || 'a href="editreview_reading.html?frn=001' || t.studentsdcid || chr(38) || 'tierid=' || t.id || chr(38) || 'editid=' || r.id || '" class="dialog dockedDialog button"' || chr(62) || 'Edit' || chr(60) || '/a' || chr(62) || chr(60) || '/div' || chr(62) || chr(60) || '/td' || chr(62) ||  
+chr(60) || 'td' || chr(62) || chr(60) || 'div class="fixBreaks"' || chr(62) || r.review_decisions || chr(60) || '/div' || chr(62) || chr(60) || '/td' || chr(62) || 
+chr(60) || 'td' || chr(62) || chr(60) || 'div class="fixBreaks"' || chr(62) || r.review_notes || chr(60) || '/div' || chr(62) || chr(60) || '/td' || chr(62) || 
+chr(60) || '/tr' || chr(62) END
+) WITHIN GROUP (ORDER BY r.review_date desc) AS reviews
+FROM u_rti_tier t
+LEFT OUTER JOIN u_rti_review r ON t.id = r.u_rti_tierid
+WHERE t.studentsdcid = ~(rn)
+AND UPPER(t.tier_subject) = 'READING'
+AND t.tier_exit is not null
+GROUP BY 
+ROWNUM,
+t.tier_entry,
+to_char(t.tier_entry, 'fmMM/DD/YYYY'),
+CASE WHEN t.tier_exit is null THEN 'Current'
+ELSE to_char(t.tier_exit, 'fmMM/DD/YYYY') END,
+t.tier_level,
+t.studentsdcid,
+t.id,
+t.tier_age,
+t.tier_grade,
+CASE 
+    WHEN t.tier_area = 'Computation' THEN 'Computation'
+    WHEN t.tier_area = 'Concepts_Applications' THEN 'Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Comp_Concepts_Apps' THEN  'Computation ' || chr(43) || ' Concepts ' || chr(38) || ' Applications'
+    WHEN t.tier_area = 'Early Numeracy' THEN 'Early Numeracy'  ELSE t.tier_area END,
+t.tier_program,
+CASE WHEN t.tier_days = '1' THEN '1 Day' ELSE t.tier_days || ' Days' END,
+t.tier_min,
+t.tier_group_size,
+CASE WHEN t.tier_sec_program IS NULL THEN 'secHidden' ELSE 'secShow' END,
+t.tier_sec_program,
+CASE WHEN t.tier_sec_days = '1' THEN '1 Day' ELSE t.tier_sec_days || ' Days' END,
+t.tier_sec_min,
+t.tier_sec_group_size,
+CASE WHEN t.tier_attissue IS NULL THEN 'None' ELSE t.tier_attissue END,
+CASE WHEN t.tier_attissue IS NOT NULL THEN chr(60) || 'strong' || chr(62) || 'Att Details' || chr(58) || ' ' || chr(60) || '/strong' || chr(62) || t.tier_attnotes ELSE ' ' END,
+t.tier_interventionist,
+t.tier_interventionist_addr,
+t.tier_notes
+ORDER BY t.tier_entry desc
+;alternatecolor;nonemessage=<div class="noMessageHistory">&nbsp;</div>]
+<div class="box-round history-~(rownum)">
+<div class="hidden">~(tier_entry)</div>
+<h3>~(tier_entry_pretty) - ~(tier_exit) &nbsp;&nbsp;&nbsp;TIER: ~(tier_level)&nbsp;&nbsp;<a href="editmtss_read.html?frn=001~(studentsdcid)&studentsdcid=~(studentsdcid)&editid=~(id)" class="dialog dockedDialog button">Edit This Record</a></h3>
+    <table class="linkDescList">
+    <tr><td><strong>Entry Age:</strong> ~(tier_age)</td><td colspan="2"><strong>Area of Support:</strong> ~(tier_area)</td></tr>
+    <tr><td colspan="3">1. <strong>Materials / Program / Level:</strong> ~(tier_program)</td></tr>
+    <tr><td>1. <strong>Days:</strong> ~(tier_days)</td><td><strong>Minutes:</strong> ~(tier_min)</td><td><strong>Group Size:</strong> ~(tier_group_size)</td></tr>
+    <tr class="~(show_2nd)"><td colspan="3">2. <strong>Materials / Program / Level:</strong> ~(tier_sec_program)</td></tr>
+    <tr class="~(show_2nd)"><td>2. <strong>Days:</strong> ~(tier_sec_days)</td><td><strong>Minutes:</strong> ~(tier_sec_min)</td><td><strong>Group Size:</strong> ~(tier_sec_group_size)</td></tr>
+    <tr><td><strong>Att Issues:</strong> ~(tier_attcheck)</td><td colspan="2"><div class="attdetails">~(tier_attnotes)</div></td></tr>
+    <tr><td colspan="3"><strong>Interventionist:</strong> ~(tier_interventionist) &nbsp;&nbsp;&nbsp;<strong>Email:</strong> ~(tier_interventionist_addr)</td></tr>
+    <tr><td colspan="3"><strong>Notes:</strong><div class="fixBreaks">~(tier_notes)</div></td></tr>
+    <tr><td colspan="3"><a class="dialog dockedDialog button" href="addreview_reading.html?frn=001~(studentsdcid)&tierid=~(id)&authId=-1">Add Review</a></td></tr>
+    <tr><td colspan="3" class="reviewTable"><table><thead><tr><th>Review Date</th><th>Decisions</th><th>Notes</th></tr></thead>~(reviews)</table></td></tr>
+    </table>  
+    </div>
+[/tlist_sql]
+</div> <!-- end history-wrapper -->
+
+    </div> <!-- end right column -->   
+    <!-- end of content area -->
+	~[wc:admin_footer_frame_css]
+<script>    
+$j(document).ready(function(){
+    $j('.moreassess').click(function(){
+        var link = $j(this);
+        var nextDiv = $j(this).next(".AllAssess");
+        nextDiv.slideToggle(400, function() {
+            if (nextDiv.is(':visible')) {
+                 link.text('Hide Previous Scores');                
+            } else {
+                 link.text('View Previous Scores');                
+            }        
+        });       
+    });    
+    $j('.eldetaillink').click(function(){
+        var link = $j(this);
+        var nextDiv = $j(this).next(".eldetailtable");
+        nextDiv.slideToggle(400, function() {
+            if (nextDiv.is(':visible')) {
+                 link.text('Hide EL Details');                
+            } else {
+                 link.text('View EL Details');                
+            }        
+        });       
+    });    
+    $j('.emailTeachersLink').click(function(){
+        var link = $j(this);
+        var nextDiv = $j(this).closest('div').next(".emailTeachersDiv");
+        nextDiv.slideToggle(400, function() {
+            if (nextDiv.is(':visible')) {
+                 link.text('Hide Teacher Email');                
+            } else {
+                 link.text("Email all of ~(first_name)'s Teachers");                
+            }        
+        });       
+    });
+    $j('.noMessage').next('table').hide();
+    $j('.noMessage').closest('.SingleAssess').next('.moreassess').hide();
+    $j('.noMessageTrans').prev('.transTitle').hide();
+    $j('.noMessageHistory').closest('.history-wrapper').prev('.history-label').hide();
+    //hide unneeded previous record links
+    $j('.noMessagePrev').closest('.AllAssess').prev('.moreassess').hide();
+    // replace line breaks in textareas
+    $j('.fixBreaks').each(function(){
+        $j(this).html($j(this).html().replace(/\n\r?/g, '<br />'));
+    });
+    // aprenda show more
+    $j('.assessDiv').each(function() {
+        if ($j(this).find('tr').length > 1) {
+            $j(this).show();                         
+       }
+    });
+    $j(".primary").click(function(){
+      var rowg = $j(this).data("name");
+      $j(".secondary" + rowg).toggle( 600, "linear" );
+     });
+}); 
+</script>
+</body> 
+</html>
