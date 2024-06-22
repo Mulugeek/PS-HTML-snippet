@@ -1,1 +1,112 @@
+<script>
+	function disableSubmit() {
+		$j('#btnSubmit').attr('disabled', 'true');
+		$j('#id_form_save_alert_message').hide();
+	}
+	
+	function enableSubmit() {
+		$j('#btnSubmit').removeAttr('disabled');
+		$j('#id_blank_field_alert_message').hide();
+		$j('#id_form_save_alert_message').show();
+	}
+	
+	function filldate () {
+		var d = new Date();
+		var month = d.getMonth()+1;
+		var day = d.getDate();
+		var output = ((''+month).length<2 ? '0' : '') + month + '/' + ((''+day).length<2 ? '0' : '') + day + '/' + d.getFullYear();
+		$j('#tier_entry').val(output);
+	}
+	
+    function checkform() {
+		var tier_entry = $j.trim($j('#tier_entry').val());
+        var tier_attnotes = $j.trim($j('#tier_attnotes').val());
+        var tier_exit = $j.trim($j('#tier_exit').val());
+        var tier_exittype = $j('#tier_exittype').val();
+        var tier_attissue = $j('#tier_attissue').val();
+		if (tier_entry === '') {
+			$j('#id_blank_field_alert_message').html('Entry Date is required.');
+			$j('#id_blank_field_alert_message').show();
+			disableSubmit();
+		} else if (tier_attissue !== '' && tier_attnotes === '') {
+            $j('#id_blank_field_alert_message').html('Issue Details is required.');
+            $j('#id_blank_field_alert_message').show();
+			disableSubmit();
+		} else if (tier_exit !== '' && tier_exittype === '') {
+            $j('#id_blank_field_alert_message').html('Exit Type is required.');
+            $j('#id_blank_field_alert_message').show();
+			disableSubmit();
+		} else enableSubmit();
+	}
+	$j(document).ready(function() {
+        $j.ajax("mtss_reading.html?frn=~(studentfrn)");
+        $j('form#editmtssform').change( function() {
+			checkform();
+		});
+        $j('[name="deleteRecord"]').click( function() {
+			$j(this).hide().next().show().next().show();
+		});
+		$j('[name="deleteRecordConfirm"]').click( function() {
+            $j('#deletetierform').submit();
+		});
+		$j('[name="deleteRecordCancel"]').click( function() {
+			$j(this).hide().next().hide();
+			$j(this).prev().show();
+		});
+        $j("#tier_attissue").on('change', function() {
+         if($j(this).val() !== '') {
+           $j('.attnotes').show();
+            }
+          else {
+          $j('.attnotes').hide();
+          $j('#tier_attnotes').val('');
+          }
+        });
+        $j("#tier_attstaffissue").on('change', function() {
+         if($j(this).val() == 'Other') {
+           $j('.attstaffnotes').show();
+            }
+          else {
+          $j('.attstaffnotes').hide();
+          $j('#tier_attstaffnotes').val('');
+          }
+        });
+        $j("#tier_exit").on('change', function() {
+         if($j(this).val() == '') {
+           $j('.exitype').hide();
+            $j('#tier_exittype').val('');
+            }
+          else {
+          $j('.exitype').show();
+          }
+        });
+        if (($j('#tier_sec_program').val() && $j('#tier_sec_min').val() && $j('#tier_sec_group_size').val() && $j('#tier_sec_days').val()) == '') {
+                $j('.secProgram').hide();
+                $j('.addIntervention').text('Add 2nd Intervention');
+            } else {
+                $j('.addIntervention').text('Remove 2nd Intervention');
+                $j('.secProgram').show();
+            }  
+        $j("#tier_attissue,#tier_attstaffissue,#tier_exit").trigger('change');
+        checkform();
+    });
+    
+    $j('.fillName').on('click', function(){
+        var currentUserName = '~[dbval;table=teachers;field=first_name;*id=~[x:userid]] ~[dbval;table=teachers;field=last_name;*id=~[x:userid]]';
+        var currentUserEmail = '~[dbval;table=teachers;field=email_addr;*id=~[x:userid]]';
+        $j('#tier_interventionist').val(currentUserName);
+        $j('#tier_interventionist_addr').val(currentUserEmail);
+    });
+    $j('.addIntervention').on('click', function(){
+        $j('.secProgram').fadeToggle(200,'linear',function(){
+            if ($j('.secDays').is(':visible')) {
+                $j('.addIntervention').text('Remove 2nd Intervention');
+            } else {
+                $j('.addIntervention').text('Add 2nd Intervention');
+                $j('.secProgram input').val('');
+                $j('.secProgram select').val('');
+            }  
+        }); 
+    });  
+</script>
 
