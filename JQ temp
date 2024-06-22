@@ -1,3 +1,35 @@
+
+<div id="submitdiv">
+		<input type="hidden" name="ac" value="prim">~[submitbutton]
+	</div>	
+</form>
+
+<!-- delete button -->
+    <form action="/admin/students/mtss/mtss_reading.html?frn=001~(rn)" method="POST" id="deletetierform">
+	<div id="deletediv">
+        <input type="hidden" name="ac" value="prim"/>
+		<input type="hidden" name="DC-STUDENTS:~(rn).U_RTI.U_RTI_TIER:~[gpv:editid]" value="on">
+        <a name="deleteRecord" id="deleteRecord" class="button">Delete Record</a>
+		<a name="deleteRecordCancel" id="deleteRecordCancel" class="button" style="display: none">Cancel</a>
+		<a name="deleteRecordConfirm"  id="deleteRecordConfirm" class="button" style="display: none;background-color: Orange">Confirm Delete</a>
+	</div>
+    </form>
+<div id="id_blank_field_alert_message" class="feedback-alert" style="display: none">Entry Date is required.</div>
+<div id="id_form_save_alert_message" class="feedback-info" style="display: none">Remember to Submit.</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 	function disableSubmit() {
 		$j('#btnSubmit').attr('disabled', 'true');
