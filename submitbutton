@@ -7,3 +7,27 @@ Student email from AD:<br>
 </div>
 <div class="button-row"><input type="hidden" name="ac" value="prim">~[submitbutton]</div>
 </form>
+
+
+
+##############################################################################################################################################
+
+</table>
+                <input type="hidden" name="ac" value="prim">
+            </form>
+
+            <div class="button-row">
+                ~[if.~[gpv:id]>0]
+                <form id="delete_button" action="senneed.html?frn=~(studentfrn)" method="post">
+                    <input type="hidden" name="ac" value="prim" />
+                    <input type="hidden" name="DD-U_SENDNEED.ID:~(gpv.id)" value="1" />
+                    <button type="submit" class="button confirmationReq initialized hide" id="btnDelete">Confirm Delete</button>
+                    <button type="button" class="btnConfirmCancel hide">Cancel</button>
+                    <button type="button" class="btnConfirmProxy">Delete</button>
+                </form>
+                [/if]
+                <button name="btnSubmit" id="btnSubmit" type="button">Submit</button>
+
+            </div>
+
+        </div>
