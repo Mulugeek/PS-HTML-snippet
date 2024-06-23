@@ -1,0 +1,9 @@
+<form>
+<div class="box-round">
+<p>
+Student email from AD:<br>
+<input type="text" name="[Students.U_Students_Extension]Student_School_Email" value="" size="50"><br>
+</p>
+</div>
+<div class="button-row"><input type="hidden" name="ac" value="prim">~[submitbutton]</div>
+</form>
