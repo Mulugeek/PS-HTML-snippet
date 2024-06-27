@@ -1,0 +1,106 @@
+<style>
+    #submitdiv {padding-right: 20px;}
+    #deletediv {padding-left: 20px;padding-top: 7px;}
+</style>
+
+<form action="/admin/students/mtss/mtss_reading.html?frn=001~(rn)" method="POST" id="editreviewform">
+
+    <h2>Edit Review for ~(last_name), ~(first_name)</h2>
+
+~[tlist_sql;
+SELECT r.id,
+to_char(r.review_date, 'MM/DD/YYYY'),
+r.review_decisions,
+r.review_notes
+FROM U_RTI_REVIEW r
+WHERE r.id = ~[gpv:editid];]
+<table class="grid editReview">      
+    <tr>
+        <td>
+            <b>Review Date:</b>
+        </td>
+        <td>
+            <input type="text" name="CF-[U_RTI_TIER:~[gpv:tierid].U_RTI.U_RTI_REVIEW:~(id)]review_date" value="~(review_date)" id="review_date" class="psDateWidget" placeholder="MM/DD/YYYY">
+        </td>
+    </tr>    
+    <tr>
+        <td>
+            <b>Review Decisions:</b>
+        </td>
+        <td>
+            <textarea name="CF-[U_RTI_TIER:~[gpv:tierid].U_RTI.U_RTI_REVIEW:~(id)]review_decisions" rows="3" cols="40" id="review_decisions">~(review_decisions)</textarea>
+        </td>
+    </tr>    
+    <tr>
+        <td>
+            <b>Notes:</b>
+        </td>
+        <td>
+            <textarea name="CF-[U_RTI_TIER:~[gpv:tierid].U_RTI.U_RTI_REVIEW:~(id)]review_notes" rows="3" cols="40" id="review_notes">~(review_notes)</textarea>
+        </td>
+    </tr>
+</table>
+
+[/tlist_sql]
+<div id="id_blank_field_alert_message" class="feedback-alert" style="display: none">Review Date is required.</div>
+<div id="id_form_save_alert_message" class="feedback-info" style="display: none">Your changes have not yet been saved.<br />Click Submit after all changes have been made.</div>
+	<div id="submitdiv" style="float:right">
+		<input type="hidden" name="ac" value="prim">~[submitbutton]
+	</div>	
+</form>
+
+<!-- delete button -->
+    <form action="/admin/students/mtss/mtss_reading.html?frn=001~(rn)" method="POST" id="deletereviewform">
+	<div id="deletediv" style="float:left">
+        <input type="hidden" name="ac" value="prim"/>
+		<input type="hidden" name="DC-U_RTI_TIER:~[gpv:tierid].U_RTI.U_RTI_REVIEW:~[gpv:editid]" value="on">
+        <a name="deleteRecord" id="deleteRecord" class="button">Delete Record</a>
+		<a name="deleteRecordCancel" id="deleteRecordCancel" class="button" style="display: none">Cancel</a>
+		<a name="deleteRecordConfirm"  id="deleteRecordConfirm" class="button" style="display: none;background-color: Orange">Confirm Delete</a>
+	</div>
+    </form>
+<script>
+	function disableSubmit() {
+		$j('#btnSubmit').attr('disabled', 'true');
+		$j('#id_form_save_alert_message').hide();
+	}
+	
+	function enableSubmit() {
+		$j('#btnSubmit').removeAttr('disabled');
+		$j('#id_blank_field_alert_message').hide();
+		$j('#id_form_save_alert_message').show();
+	}
+	
+	function filldate () {
+		var d = new Date();
+		var month = d.getMonth()+1;
+		var day = d.getDate();
+		var output = ((''+month).length<2 ? '0' : '') + month + '/' + ((''+day).length<2 ? '0' : '') + day + '/' + d.getFullYear();
+		$j('#review_date').val(output);
+	}
+	
+	function checkform() {
+		var review_date = $j.trim($j('#review_date').val());
+		if (review_date === '') {
+			$j('#id_blank_field_alert_message').show();
+			disableSubmit();
+		} else enableSubmit();
+	}
+	$j(document).ready(function() {
+        $j.ajax("mtss_reading.html?frn=~(studentfrn)");
+        $j('form#editreviewform').change( function() {
+			checkform();
+		});
+        $j('[name="deleteRecord"]').click( function() {
+			$j(this).hide().next().show().next().show();
+		});
+		$j('[name="deleteRecordConfirm"]').click( function() {
+            $j('#deletereviewform').submit();
+		});
+		$j('[name="deleteRecordCancel"]').click( function() {
+			$j(this).hide().next().hide();
+			$j(this).prev().show();
+		});
+        checkform();
+    });
+</script>
