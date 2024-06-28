@@ -1,0 +1,27 @@
+<tr>
+				<td class="bold">School Name</td>
+				<td>
+					<select id="schoolDropDown">
+					~[if.~(gpv.assetid)=-1]
+						<option value="-1">Select a school</option>
+					[else]
+						~[tlist_sql;
+							SELECT schoolid,
+							schoolname
+							FROM u_assettable
+							WHERE id = ~(gpv.assetid)
+						;]
+							<option value="~(schoolid)">~(schoolname)</option>
+						[/tlist_sql]
+					[/if]
+					<option value="0">District</option>
+					~[tlist_sql;
+                            SELECT
+                                school_number, 
+								name
+							FROM schools
+						;]
+							<option value="~(id)">~(schoolname)</option>
+						[/tlist_sql]
+                    </select>
+</tr>
