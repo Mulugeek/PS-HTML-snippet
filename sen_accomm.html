@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<!-- start right frame -->
+<head>
+    <title>Student Assessment Report</title>
+    ~[wc:UI_js_includes]
+    ~[wc:commonscripts]
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+<link href="/images/css/print.css" rel="stylesheet" media="print">
+    <link rel="stylesheet" type="text/css" href="/images/boxing.css">
+    
+    <script src="/scripts/dist/teacher_tools/components/shared/ckeditor/ckeditor.js"></script>
+
+ <style>
+     
+   body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px;
+    }
+    .leftinfo, .rightinfo {
+        width: 50%;
+        padding: 5px;
+        border: 0.5px solid #ccc;
+        box-sizing: border-box;
+    }
+    .sendinfo, .needinfo {
+        padding: 5px;
+        margin-bottom: 5px;
+        background-color: #f0f0f0;
+        border: 0.5px solid #ddd;
+    }
+    
+    
+     .rightinfo {
+        width: 100%;
+        padding: 5px;
+        border: 0.5px solid #ccc;
+        box-sizing: border-box;
+    }
+    .needinfo {
+        padding: 5px;
+        margin-bottom: 5px;
+        background-color: #f0f0f0;
+        border: 0.5px solid #ddd;
+ 
+    }
+    
+    
+    
+     .grid-container1 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+        gap: 5px; /* Gap between grid items */
+        border: 0.5px solid maroon;
+        margin: 5px
+    }
+    
+    .grid-container1 > div {
+    margin: 10px; /* Add margin around each grid item */
+    padding: 5px; /* Optional padding inside each grid item */
+    background-color: #f0f0f0; /* Example background color */
+     
+}
+    .grid-item {
+        padding: 5px;
+        border: 0.5px solid #ccc;
+        border-radius: 3px;
+        
+    }
+    .larger-item {
+        grid-column: span 5; /* Span across all three columns */
+    }
+    .label {
+        font-weight: bold;
+        margin-bottom: 1px;
+    }
+    
+    .right-half {
+    width: 50%;
+    background-color: #e0e0e0; /* Lighter gray background */
+  }
+    
+
+   
+</style>
+
+
+</head>
+<body>
+    
+~[wc:admin_header_frame_css]<!-- breadcrumb start --><a href="/admin/home.html" target="_top">~[text:psx.html.admin_students.generaldemographics.start_page]</a> &gt; <a
+        href="home.html?selectstudent=nosearch" target="_top">~[text:psx.html.admin_students.generaldemographics.student_selection]</a> &gt;Admissions Data<!-- breadcrumb end -->~[wc:admin_navigation_frame_css]
+
+~[wc:title_student_begin_css] Student Inclusion ~[wc:title_student_end_css]
+
+
+
+<!-- start of content area -->
+~[if.~(gpv.changesSaved)=true]<div class="feedback-confirm">~[text:psx.common.changes_recorded]</div>[/if]
+<div class="box-round">
+    <!--
+<div class="container" style="background-color: #FF6F61">
+    <div class="leftinfo" style="background-color: #6B5B95">
+        Your content here
+    </div>
+</div>
+-->
+   
+        <div class="sendinfo">
+          
+           
+    
+      <td>
+        <a class="button dialog dockedDialog" href="addsend_accom.html?frn=~(studentfrn)">ADD/Update</a>
+     </td>
+ 
+
+     
+<div class="current_wrapper">
+    <table class="grid">
+         ~[tlist_sql; SELECT U_CRIMEDU.StudentsDCID,
+                     CASE WHEN U_CRIMEDU.SEN = 1 THEN 'Yes' ELSE 'No' END AS SEN_Status,
+                     TO_CHAR(U_CRIMEDU.crim_accomstartdate, 'MM/DD/YYYY') AS crim_accomstartdate,
+                     TO_CHAR(U_CRIMEDU.CRIM_ACCODATEReviewed, 'MM/DD/YYYY') AS crim_accomDATEReviewed,
+                      U_CRIMEDU.ACCOMM_CURRENT_CASE_MANAGER,
+                     U_CRIMEDU.ACCOMM_SEND_LEVEL,
+                     U_CRIMEDU.ACCOMM_CENTER,
+                     U_CRIMEDU.ACCOMM_FTE,
+                     U_CRIMEDU.ACCOMM_SEND_MAINCATEGORY,
+                     U_CRIMEDU.SEND_VULNERABILITY_STATUS,
+                     U_CRIMEDU.CRIM_ACCOMAREASOFSTRENGTH,
+                     U_CRIMEDU.CRIM_ACCOMCURSTRUGGLES,
+                     U_CRIMEDU.CRIM_Exam_Accommodations,
+                     U_CRIMEDU.CRIM_ACCOMAREASOFINTEREST,
+                     U_crimedu.crim_accomtargetsections,
+                     U_CRIMEDU.CRIM_accommodationsoverview,
+                     U_CRIMEDU.crim_accomfollowup,
+                     U_CRIMEDU.CRIM_ACCOMThingstoAvoid
+        FROM students
+        JOIN U_CRIMEDU ON U_CRIMEDU.STUDENTSDCID = students.dcid
+        WHERE students.id = ~(curstudid)
+        ;]
+        <div class="grid-container1"  style="background-color: #ADD8E6">
+          
+            <div class="grid-item">
+                <div class="label">Student ID</div>
+                <div>~(studentsDCID)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">SEN Status</div>
+                <div>~(SEN_Status)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">Start Date</div>
+                <div>~(crim_accomstartdate)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">Review Date</div>
+                <div>~(CRIM_ACCODATEReviewed)</div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="label">Case Manager</div>
+                <div>~(ACCOMM_CURRENT_CASE_MANAGER)</div>
+            </div>
+    
+            <div class="grid-item">
+                <div class="label">Level:</div>
+                <div>~(U_CRIMEDU.ACCOMM_SEND_LEVEL)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">Center</div>
+                <div>~(U_CRIMEDU.ACCOMM_CENTER)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">FTE</div>
+                <div>~(U_CRIMEDU.ACCOMM_FTE)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">Main Category:</div>
+                <div>~(U_CRIMEDU.ACCOMM_SEND_MAINCATEGORY)</div>
+            </div>
+            <div class="grid-item">
+                <div class="label">Vulnerability Status:</div>
+                <div>~(U_CRIMEDU.SEND_VULNERABILITY_STATUS)</div>
+            </div>
+            <div class="grid-item larger-item">
+                <div class="label">Areas of Strength</div>
+                <div>~(U_CRIMEDU.CRIM_ACCOMAREASOFSTRENGTH)</div>
+            </div>
+            <div class="grid-item larger-item">
+                <div class="label">Areas of Difficulty</div>
+                <div>~(U_CRIMEDU.CRIM_ACCOMCURSTRUGGLES)</div>
+            </div>
+            <div class="grid-item larger-item">
+                <div class="label">Exam Access Arrangements</div>
+                <div>~(U_CRIMEDU.CRIM_Exam_Accommodations)</div>
+            </div>
+            
+            <div class="grid-item larger-item">
+                <div class="label">Area of Interest</div>
+                <div>~(U_CRIMEDU.CRIM_ACCOMAREASOFINTEREST)</div>
+            </div>
+             <div class="grid-item larger-item">
+                <div class="label">Targets section:</div>
+                <div>~(U_CRIMEDU.crim_accomtargetsections)</div>
+            </div>
+            
+            <div class="grid-item larger-item">
+                <div class="label">Accommodation Overview:</div>
+                <div>~(U_CRIMEDU.CRIM_accommodationsoverview)</div>
+            </div>
+            <div class="grid-item larger-item">
+                <div class="label">Things to Help:</div>
+                <div>~(U_CRIMEDU.U_CRIMEDU.crim_accomfollowup)</div>
+            </div>
+            <div class="grid-item larger-item">
+                <div class="label">Things to Avoid or Triggers:</div>
+                <div>~(U_CRIMEDU.U_crimedu.CRIM_ACCOMThingstoAvoid)</div>
+            </div>
+            
+      </div>
+      
+      
+        [/tlist_sql]
+    </table>
+
+     <!--<div class="rightinfo" style="background-color: #FF6F61"> -->
+        <div class="needinfo">
+            <h2>Please add any additional details</h2>
+            <td>
+                <a class="button dialog dockedDialog" href="add_need.html?frn=~(studentfrn)">ADD Additional Need</a>
+                
+            </td>
+
+            <table class="grid">
+                
+                ~[tlist_sql; 
+                           select U_SENDNEED.id,
+                                  U_SENDNEED.SEND_NEED_TYPE,
+                                  U_SENDNEED.SEND_MAIN_CATEGORY,
+                                  U_SENDNEED.SEND_NEED_CATEGORY,
+                                  U_SENDNEED.SEND_NEED_NOTE
+                FROM students
+                     JOIN U_SENDNEED ON U_SENDNEED.STUDENTSDCID=students.dcid
+                     WHERE students.id = ~(curstudid);]
+                
+                
+                
+<div class="grid-container1" style="background-color: #ADD8E6">
+    <div class="grid-item larger-item" style="background-color: #ADD8E6">
+           <!-- Muluneh remove one of the two -->
+     
+
+        <a class="dialog dockedDialog button" title="Edit Needs" href="editreview_send.html?id=~(id)">
+            Edit
+        </a>
+  
+
+          
+    </div>
+    <div class="grid-item">
+        <div class="label">Need Type</div>
+        <div>~(SEND_NEED_TYPE)</div>
+    </div>
+    <div class="grid-item">
+        <div class="label">Main Category</div>
+        <div>~(SEND_MAIN_CATEGORY)</div>
+    </div>
+    <div class="grid-item">
+        <div class="label">Need Category</div>
+        <div>~(SEND_NEED_CATEGORY)</div>
+    </div>
+    <div class="grid-item larger-item">
+        <div class="label">Note</div>
+        <div>~(SEND_NEED_NOTE)</div>
+    </div>
+    
+</div>
+                
+                [/tlist_sql]
+            </table>
+        </div>
+    
+    </div>
+    
+ <!--   
+
+</div>
+
+
+</div>
+</div>
+-->
+
+<div class="right-half">
+      <!-- Content for the right half -->
+      <h2>Page in progress</h2>
+      <p>G&T</p>
+      
+
+      
+    </div>
+
+<!-- end of content area -->
+~[wc:admin_footer_frame_css]
+</body> 
+</html>
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
