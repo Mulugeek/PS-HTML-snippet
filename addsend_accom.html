@@ -1,0 +1,196 @@
+ 
+  <script>
+               $j(document).ready(function() {
+                CKEDITOR.replaceAll('useCKEditor', {
+                    height: 200,
+                    width: 150,
+                    });
+               });
+            </script>
+       
+ 
+~[if#saved.gpv.savedChanges=true]
+    <div class="feedback-confirm">Changes were saved successfully</div>
+[/if#saved]
+ 
+            <form action="/admin/students/cgacustompages/sen_accom.html?frn=~(studentfrn)" method="POST">
+ <table class="grid">
+     
+ <tr bgcolor="#edf3fe">
+    <td>SEN Status</td>
+        <td><label><input type="radio" name="[STUDENTS.U_crimedu]SEN" value="1">Yes</label>
+        <label><input type="radio" name="[STUDENTS.U_crimedu]SEN" value="0">No</label>
+    </td>
+</tr>
+
+    <tr>
+    <td class="bold">Start Date</td>
+    <td><input type="text" name="[Students.U_crimedu]crim_accomstartdate" value="" size="10" class="psDateWidget" id="psSPReviewDate3yr"></td>
+    </tr>
+    
+    <tr>
+    <td class="bold">Date Reviewed</td>
+    <td><input type="text" name="[Students.U_crimedu]CRIM_ACCODATEReviewed" value="" size="10" class="psDateWidget" id="psSPReviewDateyr"></td>
+    </tr>
+    
+  <tr>
+    <td class="bold">Case Manager</td>
+    <td>
+        <select id="fieldACCOMM_CURRENT_CASE_MANAGER" name="[Students.U_CRIMEDU]ACCOMM_CURRENT_CASE_MANAGER">
+            <option value="">Select Case Manager</option>
+            
+           
+            ~[tlist_sql;
+                select u.first_name || ', ' || u.last_name mycasemanager
+                from users u
+            ;]
+           
+            <option value="~(mycasemanager)">~(mycasemanager)</option>
+            
+            [/tlist_sql]
+        </select>
+    </td>
+</tr>
+
+<tr bgcolor="#edf3fe">
+            <td class="bold">SEND Level:</td>
+            <td>
+                <label>
+                    <input type="radio" name="[Students.U_crimedu]ACCOMM_SEND_LEVEL" value="Low">
+                    Low
+                </label>
+                <label>
+                    <input type="radio" name="[Students.U_crimedu]ACCOMM_SEND_LEVEL" value="Mid">
+                    Mid
+                </label>
+                <label>
+                    <input type="radio" name="[Students.U_crimedu]ACCOMM_SEND_LEVEL" value="Highest">
+                    Highest
+                </label>
+            </td>
+        </tr>
+
+
+<tr>
+		<td class="bold">Center</td>
+
+				<td> 
+
+					<select name="[Students.U_crimedu]ACCOMM_CENTER">
+                        <option value=""></option>    
+						<option value="Aoraki">Aoraki</option>
+					    <option value="Greenwich">Greenwich</option>
+					    <option value="Da Vinci">Da Vinci</option>
+					    <option value="US School">US School</option>
+
+					</select>
+
+				</td>
+
+			</tr>
+
+<tr bgcolor="#edf3fe">
+
+      <td class="bold">SEND FTE</td>
+      <td>
+                 <select name="[Students.U_crimedu]ACCOMM_FTE">
+                        <option value=""></option>    
+                        <option value="Full Time">Full Time</option>
+                        <option value="Part Time">Part Time</option>
+                </select> 
+ </td>
+ </tr>
+<tr bgcolor="#edf3fe">
+<td class="bold">Main Category</td>
+<td>
+    <select name="[Students.U_crimedu]ACCOMM_SEND_MAINCATEGORY">
+         <option value=""></option>
+         <option value="Speech, Language and Communication Needs">Speech, Language and Communication Needs</option>
+         <option value="Moderate Learning Difficulty">Moderate Learning Difficulty</option>
+         <option value="Social, Emotional and Mental Health">Social, Emotional and Mental Health</option>
+         <option value="Specific Learning Difficulty">Specific Learning Difficulty</option>
+         <option value="Autistic Spectrum Disorder">Autistic Spectrum Disorder</option>
+         <option value="Other Difficulty/Disability">Other Difficulty/Disability</option>
+         <option value="SEN Support no Specialist Assessment of type need">SEN Support no Specialist Assessment of type need</option>
+         <option value="Physical Disability">Physical Disability</option>
+         <option value="Severe Learning Difficulty">Severe Learning Difficulty</option>
+         <option value="Hearing Impairment">Hearing Impairment</option>
+         <option value="Visual Impairment">Visual Impairment</option>
+         <option value="Profound and Multiple Learning Difficulty">Profound and Multiple Learning Difficulty</option>
+         <option value="Multi-Sensory Impairment">Multi-Sensory Impairment</option>
+    </select>
+   </td>
+</tr>
+
+<tr bgcolor="#edf3fe">
+ <td class="bold">Vulnerability Status</td>
+ <td>
+ <select name="[Students.U_crimedu]SEND_VULNERABILITY_STATUS">
+                        <option value=""></option>    
+                        <option value="Mental Health and Wellbeing">Mental Health and Wellbeing</option>
+                        <option value="Risk Taking Behavior">Risk Taking Behavior</option>
+                        <option value="Previous Vulnerability Behavior">Previous Vulnerability Behavior</option>
+                        <option value="No">No</option>
+                       
+                    </select>
+ </td>
+ </tr>
+
+ 
+ <tr bgcolor="#edf3fe">
+<td class="bold">Areas of Strength</td>
+<td>
+    <textarea id="notes" name="[Students.U_crimedu]CRIM_ACCOMAREASOFSTRENGTH"  rows="4" cols="60"></textarea>
+ </td>
+ </tr>
+ 
+ 
+   <tr bgcolor="#edf3fe">
+<td class="bold">Areas of Difficulty</td>
+<td>
+    <textarea id="notes" name="[Students.U_crimedu]CRIM_ACCOMCURSTRUGGLES"  rows="4" cols="60"></textarea>
+ </td>
+ </tr>
+  <tr bgcolor="#edf3fe">
+<td class="bold">Exam Access Arrangements</td>
+<td>
+    <textarea id="notes" name="[Students.U_crimedu]CRIM_Exam_Accommodations"  rows="4" cols="60"></textarea>
+ </td>
+ </tr>
+ 
+ <tr bgcolor="#edf3fe">
+<td class="bold">Areas of Intrest</td>
+<td>
+    <textarea id="notes" name="[Students.U_crimedu]CRIM_ACCOMAREASOFINTEREST"  rows="4" cols="60"></textarea>
+ </td>
+ </tr>
+ <tr bgcolor="#edf3fe">
+<td class="bold">Targets' Section</td>
+<td>
+    <textarea id="notes" name="[Students.U_crimedu]crim_accomtargetsections"  rows="4" cols="60"></textarea>
+ </td>
+ </tr>
+ 
+  <tr bgcolor="#edf3fe">
+ <td class="bold">SEND Notes</td>
+  <td><textarea name="[Students.U_crimedu]CRIM_ACCOMMODATIONSOVERVIEW" rows="3" cols="20" maxlength="300" class="useCKEditor"></textarea></td> </tr> 
+ 
+ <tr bgcolor="#edf3fe">
+  <td class="bold">Things to Help</td>
+  <td><textarea name="[Students.U_crimedu]crim_accomfollowup" rows="3" cols="25" maxlength="300" class="useCKEditor"></textarea></td> 
+ </tr>
+ <tr bgcolor="#edf3fe">
+  <td class="bold">Things to Avoid/Triggers</td>
+  <td><textarea name="[Students.U_crimedu]CRIM_ACCOMThingstoAvoid" rows="3" cols="25" maxlength="300" class="useCKEditor"></textarea></td> 
+ </tr>
+ 
+  </table>
+
+  <div class="button-row">
+           <input type="hidden" name="ac" value="prim">~[submitbutton]
+           <a href="sen_accom.html" class="button">Cancel</a>
+  </div>
+
+
+
+</form>
