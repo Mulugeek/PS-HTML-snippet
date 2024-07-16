@@ -1,1 +1,8 @@
-
+SELECT students.last_name, students.first_name, students.grade_level, students.alert_medical, StudentCoreFields.allergies
+FROM students
+JOIN studentcorefields on students.dcid = studentcorefields.studentsdcid
+~[if#cursel.%param1%=Yes]
+INNER JOIN ~[temp.table.current.selection:students] stusel ON stusel.dcid = students.dcid
+[/if#cursel]
+WHERE students.enroll_status = 0
+ORDER BY students.last_name
