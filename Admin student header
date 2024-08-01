@@ -1,0 +1,62 @@
+<style>
+    /* Add background color and font size */
+    div#student_details_information {
+        background-color:
+            ~[if#prereg.~(enroll_status)=-1]#b8d0a3[/if#prereg]
+            ~[if#inactive.~(enroll_status)=1]#ff7f7f[/if#inactive]
+            ~[if#transferout.~(enroll_status)=2]#99ccff !important[/if#transferout]
+            ~[if#transferoutpend.~([01]Enrollment_Transfer_Date_Pend)=0/0/0][else#transferoutpend]#FFF9BF[/if#transferoutpend]
+            ~[if#graduate.~(enroll_status)=3]#bba3d0[/if#graduate];
+        font-size: 1.1em !important;
+        font-weight: 600 !important;
+    }
+    div#student_details_information span {
+        font-size: 1.1em !important;
+        font-weight: 600 !important;
+    }
+    /* Set em font size and color */
+    div#student_details_information em {
+        font-size: 0.8em !important;
+        font-weight: 350 !important;
+        color: #804000 !important;
+    }
+    /* hide certain elements in print */
+    @media print {
+        div#student_details_info_name, a#copyStudentHeaderButton, div#student_alerts, .cga-header-no-print, .cga-header-no-copy {
+            display: none !important; visibility: collapse !important; font-size: 0;
+        }
+    }
+</style>
+
+~[if#prereg.~(enroll_status)=-1]~([01]entrydate)[/if#prereg]~[if#transferout.~(enroll_status)=2]~([01]exitdate)[/if#transferout]~[if#transferoutpend.~([01]Enrollment_Transfer_Date_Pend)=0/0/0][else#transferoutpend]~([01]Enrollment_Transfer_Date_Pend)[/if#transferoutpend]~[if#graduate.~(enroll_status)=3]~([01]exitdate)[/if#graduate]
+
+<script>
+$j(function(){
+    //add student name to beginning
+    $j('div#student_details_information span').first().before(`<span>~(studentname)</span>`);
+    //add additional data at the end
+    $j('div#student_details_information span').last().after(`
+        ~[if#sameschool.~([01]schoolid)=~(curschoolid)]<span><em>School:</em> ~([schools]abbreviation)</span>[/if#sameschool]
+        ~[if#gt.~([01]schoolid)>2000]~[if#lt.~([01]schoolid)<4000]<span><em>Home Room:</em> ~([01]Home_Room) - ~([01]Home_Room)</span>[/if#lt][/if#gt]
+        <span><em>Path:</em>~([STUDENTS.U_REG_INFO]ACADEMIC_PATHWAY) </span> <span> <em>FTE:</em> ~([STUDENTS.U_REG_INFO]stu_attendance_type)</span>
+        
+        ~[if#showsid.security.inrole=1,2,6,9,10]<span><em>DOB#:</em> ~([01]dob)</span>[/if#showsid]
+        ~[if#adminonly.security.inrole=9]<span class="cga-header-no-copy"><em>CL SourcedId:</em> s~(studentrn)</span><span class="cga-header-no-copy"><em>&nbsp;StudentID:</em>&nbsp;~([students]id)</span>[/if#adminonly]
+        <a id="copyStudentHeaderButton" title="Copy Student Information To Clipboard" href="javascript:copyStudentHeader()"><pds-icon name="clipboard-plus" class="x-scope pds-icon-0 pds-widget" pds-widget="pds-widget" style="height:15px;width:15px;margin-bottom:5px;"></pds-icon></a>
+        `);
+    //remove the built-in locator and counselor icons
+    $j('a#student_locator, a.counselor').closest('span').remove();
+    //change the Print a Report icon to the PDF icon
+    $j('#print_report pds-icon').attr('name','pdf');
+});
+
+function copyStudentHeader() {
+    var cgaStudentDetailText = "";
+    $j('div#student_details_information span').not('.cga-header-no-copy').each(function( index ) {
+        cgaStudentDetailText += $j(this).text().trim() + "\t";
+    });
+   
+    var promise = navigator.clipboard.writeText(cgaStudentDetailText.trim());
+}
+
+</script>
